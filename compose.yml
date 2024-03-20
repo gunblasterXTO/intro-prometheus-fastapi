@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  fastapi:
+    container_name: intro-fastapi
+    build:
+      context: .
+    ports:
+    - 8000:8000
+
+  prometheus:
+    image: prom/prometheus
+    container_name: intro-prom
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
